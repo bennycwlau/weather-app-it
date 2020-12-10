@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-//Controller
+// Controller
 const controller = require("../../controllers").Weather;
 
 router.get("/", controller.get);

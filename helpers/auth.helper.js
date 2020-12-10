@@ -8,12 +8,13 @@ const User = mongoose.model("User");
 
 const signUp = (data) => {
   console.log("signUp Helper")
+
   return new Promise((resolve, reject) => {
     User.findOne({
       email: data.email
     }).then((user) => {
       if (user) return reject({
-        error: "Email Already Register"
+        error: "Email already registered"
       });
       else {
         data.password = bcrypt.hashSync(data.password, bcrypt.genSaltSync(10));
@@ -37,7 +38,7 @@ const login = (data) => {
       .then((user) => {
         if (user) {
           if (!bcrypt.compareSync(data.password, user.password)) return reject({
-            error: "Invalid Credentials!"
+            error: "Invalid credentials!"
           });
           else {
             var token = jwt.sign({

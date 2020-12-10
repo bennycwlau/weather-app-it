@@ -2,15 +2,16 @@ var jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
 
-// authenticate incomming request tokens
+// authenticate incoming request tokens
 const authenticate = (req, res, next) => {
   var authorization = req.header("Authorization");
+
   if (authorization) {
     jwt.verify(authorization, process.env.JWT_SECRET, function(err, token_decoded) {
       if (err) {
         return res.status(403).send({
           success: false,
-          message: "Failed to authenticate token."
+          message: "Failed to authenticate token"
         });
       } else
         User.findById(token_decoded._id).then((user) => {
@@ -19,7 +20,7 @@ const authenticate = (req, res, next) => {
             next()
           } else return res.status(403).json({
             success: false,
-            message: "Failed to authenticate token."
+            message: "Failed to authenticate token"
           });
         });
     });

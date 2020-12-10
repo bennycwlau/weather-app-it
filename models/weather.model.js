@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
 var Float = require('mongoose-float').loadType(mongoose);
 
 const WeatherSchema = new Schema({

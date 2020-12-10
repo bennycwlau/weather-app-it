@@ -6,6 +6,7 @@ const axios = require("axios");
 
 const getWeather = (query) => {
   console.log("getWeather Helper")
+
   return new Promise(async (resolve, reject) => {
     if (await isUp(`http://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${process.env.WEATHER_KEY}`)) {
       axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${process.env.WEATHER_KEY}`)
@@ -36,7 +37,7 @@ const getWeather = (query) => {
           _id: -1
         }).limit(1)
         .then(found => found.length > 0 ? resolve(found[0]) : reject({
-          error: "No Data Found"
+          error: "No data found"
         }))
         .catch(error => {
           console.log(error);

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 let uri = "";
+
 if (process.env.NODE_ENV !== "local") {
   uri =
     "mongodb+srv://" +
@@ -22,18 +23,23 @@ mongoose.connect(uri, {
   useNewUrlParser: true,
   useFindAndModify: false
 });
+
 console.log("Mongoose connecting to: " + uri);
+
 // setting promises for mongoose ORM
 mongoose.Promise = require("bluebird");
+
 //connection event
 mongoose.connection.on("connected", function() {
   console.log("Mongoose connected");
   mongoose.Promise = require("bluebird");
 });
+
 // connection error event
 mongoose.connection.on("error", function(err) {
   console.log("Mongoose connection error: " + err);
 });
+
 // remove connection 
 mongoose.connection.on("disconnected", function() {
   console.log("Mongoose disconnected");
